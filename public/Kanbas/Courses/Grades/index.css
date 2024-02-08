@@ -1,0 +1,65 @@
+.second-btn-bar {
+    display: flex;
+    justify-content: end;
+}
+
+.grade-btn {
+    background-color: rgb(234, 231, 231);
+    border: 1px solid gray !important;
+    border-radius: 0.5em;
+    margin: 1px;
+    text-align: center;
+    height: 40px;
+}
+
+.third-btn-bar {
+    display: flex;
+    justify-content: start;
+}
+
+.table {
+    border: 1px solid lightgrey;
+
+}
+
+.table tr,
+th,
+td {
+    margin: 5px;
+    padding: 2px;
+    border: 1px solid lightgrey;
+}
+
+.table td {
+    text-align: center;
+}
+
+.table .as-title {
+
+    text-align: center;
+}
+
+
+.table tbody th {
+    color: red;
+}
+
+.input-group-text {
+    background-color: white;
+    border: none;
+    align-items: center;
+}
+
+.input-grade {
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+
+}
+
+.input-grade input {
+    background-color: white;
+    border: 1px solid gray !important;
+    border-radius: 0.5em;
+    width: 4rem;
+}
