@@ -1,0 +1,161 @@
+.wd-modules,
+.wd-modules * {
+    border-radius: 0%;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wd-modules {
+    margin: 5px;
+}
+
+.wd-modules>li {
+    background-color: lightgray;
+    border: 1px solid gray !important;
+    border-left: none !important;
+}
+
+.wd-modules>li>div {
+    padding: 6px;
+    border-left: 1px solid gray !important;
+}
+
+.wd-modules>li>ul>li {
+    padding: 5px;
+    border-top: 1px solid gray !important;
+    border-left: 2px solid green;
+}
+
+.wd-modules>li {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttons .modules-buttons {
+    background-color: lightgray;
+    border: 1px solid gray !important;
+    border-radius: 0.5em;
+    margin: 1px;
+    text-align: center;
+    height: 40px;
+}
+
+
+.flex-grow-0.me-2.d-none.d-lg-block .modules-buttons {
+    background-color: lightgray;
+    border: 1px solid gray !important;
+    border-radius: 0.5em;
+    margin: 1px;
+    text-align: left;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+.button-container {
+    display: flex;
+}
+
+.title {
+    margin-left: 10px;
+}
+
+.to-do {
+    color: rgb(160, 16, 16);
+    text-decoration: none;
+}
+
+select {
+    font-family: 'FontAwesome', 'Second Font name'
+}
+
+#publish {
+    background-color: green;
+    color: white;
+}
+
+.white-top-bar .breadcrumb {
+    background-color: white;
+    font-size: medium;
+    margin-top: 10px;
+}
+
+.white-top-bar .breadcrumb a {
+    text-decoration: none;
+    color: red;
+}
+
+.sandwich {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.buttons .modules-buttons .publish-icon {
+    display: none;
+    color: green;
+}
+
+.black-top-bar .breadcrumb {
+    background-color: black;
+    font-size: medium;
+    color: white;
+    text-decoration: none;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.black-top-bar .breadcrumb a {
+    text-decoration: none;
+    color: white;
+}
+
+.black-top-bar .breadcrumb li {
+    display: inline-block;
+}
+
+.black-top-bar .breadcrumb li.sandwich {
+    position: absolute;
+    left: 0;
+}
+
+.black-top-bar .breadcrumb li.chevron {
+    position: absolute;
+    right: 0;
+}
+
+.black-top-bar .breadcrumb li.close {
+    position: absolute;
+    right: 0;
+}
+
+
+.calender {
+    font-size: x-small;
+}
+
+.title {
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.td-close {
+    color: gray;
+    position: absolute;
+    right: 5px;
+}
+
+.calender a,
+.cu-list a {
+    color: rgb(160, 16, 16);
+    text-decoration: none;
+}
