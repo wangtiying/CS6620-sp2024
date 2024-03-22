@@ -7,8 +7,10 @@ import TodoList from "./todos/TodoList";
 import Classes from "./Classes";
 import Styles from "./Styles";
 import ConditionalOutput from "./ConditionalOutput";
-
+import { useSelector } from "react-redux";
+import { LabState } from "../store";
 function Assignment3() {
+    const { todos } = useSelector((state: LabState) => state.todosReducer);
     return (
         <div className="container-fluid">
             <h2>Assignment 3</h2>
@@ -17,11 +19,13 @@ function Assignment3() {
             <Classes />
             <TodoList />
             <ul className="list-group">
-                <TodoItem todo={{ title: "Buy milk", done: true }} />
-                <TodoItem todo={{ title: "Buy bread", done: true }} />
-                <TodoItem todo={{ title: "Pickup kids", done: true }} />
-                <TodoItem todo={{ title: "Buy milk", done: true }} />
+                {todos.map((todo) => (
+                    <li className="list-group-item" key={todo.id}>
+                        {todo.title}
+                    </li>
+                ))}
             </ul>
+
             <Add2 a={22} b={44} />
             {Add2({ a: 4, b: 6 })}
             {/* <Add2 /> */}

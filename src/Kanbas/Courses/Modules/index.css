@@ -1,34 +1,20 @@
-.wd-modules,
-.wd-modules * {
-    border-radius: 0%;
-    border: none;
-    margin: 0px;
-    padding: 0px;
-}
-
 .wd-modules {
+    border-radius: 0%;
     margin: 5px;
 }
 
 .wd-modules>li {
-    background-color: lightgray;
-    border: 1px solid gray !important;
+    border: 1px solid rgb(245, 240, 240) !important;
     border-left: none !important;
-}
+    margin-bottom: 20px;
 
-.wd-modules>li>div {
-    padding: 6px;
-    border-left: 1px solid gray !important;
 }
 
 .wd-modules>li>ul>li {
     padding: 5px;
-    border-top: 1px solid gray !important;
+    border-top: 1px solid rgb(233, 230, 230) !important;
     border-left: 2px solid green;
-}
 
-.wd-modules>li {
-    margin-bottom: 20px;
 }
 
 .buttons {
@@ -38,7 +24,7 @@
 
 .buttons .modules-buttons {
     background-color: lightgray;
-    border: 1px solid gray !important;
+    border: 1px solid rgb(216, 213, 213) !important;
     border-radius: 0.5em;
     margin: 1px;
     text-align: center;
@@ -47,7 +33,7 @@
 
 
 .flex-grow-0.me-2.d-none.d-lg-block .modules-buttons {
-    background-color: lightgray;
+    background-color: rgb(251, 244, 244);
     border: 1px solid gray !important;
     border-radius: 0.5em;
     margin: 1px;

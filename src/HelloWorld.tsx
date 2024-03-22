@@ -1,5 +1,7 @@
 function HelloWorld() {
-    return <h1>Hello World!</h1>;
+    return (
+        <p>Hello World</p>
+    );
 }
-
 export default HelloWorld;
+
