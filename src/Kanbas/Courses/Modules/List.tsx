@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import modules from "../../Database/modules.json";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle, FaBook } from "react-icons/fa";
@@ -10,17 +10,46 @@ import {
     deleteModule,
     updateModule,
     setModule,
+    setModules,
 } from "./reducer";
+import * as client from "./client";
+// import { findModulesForCourse, createModule } from "./client";
 import { KanbasState } from "../../store";
 
 function ModuleList() {
     const { courseId } = useParams();
+
     const moduleList = useSelector((state: KanbasState) =>
         state.modulesReducer.modules);
     const module = useSelector((state: KanbasState) =>
         state.modulesReducer.module);
     const dispatch = useDispatch();
 
+
+    useEffect(() => {
+        client.findModulesForCourse(courseId)
+            .then((modules) =>
+                dispatch(setModules(modules))
+            );
+    }, [courseId]);
+
+    const handleUpdateModule = async () => {
+        const status = await client.updateModule(module);
+        dispatch(updateModule(module));
+    };
+
+
+    const handleAddModule = () => {
+        client.createModule(courseId, module).then((module) => {
+            dispatch(addModule(module));
+        });
+    };
+
+    const handleDeleteModule = (moduleId: string) => {
+        client.deleteModule(moduleId).then((status) => {
+            dispatch(deleteModule(moduleId));
+        });
+    };
 
 
     return (
@@ -32,10 +61,10 @@ function ModuleList() {
                 <select className="modules-buttons" >
                     <option > <span> &#xf05d;Publish All</span></option>
                 </select>
-                <button onClick={() => dispatch(updateModule(module))} className="btn btn-primary">
+                <button onClick={handleUpdateModule} className="btn btn-primary">
                     Update
                 </button>
-                <button onClick={() => dispatch(addModule({ ...module, course: courseId }))} className="btn btn-success" >+ Module</button>
+                <button onClick={handleAddModule} className="btn btn-success" >+ Module</button>
                 <button className="modules-buttons"> <FaEllipsisV className="ms-2" /></button>
             </div>
 
@@ -65,7 +94,7 @@ function ModuleList() {
                                 <h5><FaEllipsisV className="me-2" />{module.name}
                                     <button className="float-end btn btn-danger"
                                         style={{ borderRadius: '5px', padding: "3px" }}
-                                        onClick={() => dispatch(deleteModule(module._id))}>
+                                        onClick={() => handleDeleteModule(module._id)}>
                                         Delete
                                     </button>
                                     <button className="float-end btn btn-success"

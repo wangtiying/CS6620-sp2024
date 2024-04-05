@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle } from "react-icons/fa";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { assignments } from "../../Database";
+// import { assignments } from "../../Database";
 import "font-awesome/css/font-awesome.css";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../store";
 import {
+    addAssignment,
     deleteAssignment,
     selectAssignment,
     resetAssignment,
+    selectAssignments,
 } from "./assignmentsReducer";
+import * as client from "./client";
 
 function Assignments() {
     const { courseId } = useParams();
+
     const assignmentList = useSelector((state: KanbasState) =>
         state.assignmentsReducer.assignments);
     const assignment = useSelector((state: KanbasState) =>
@@ -23,6 +27,25 @@ function Assignments() {
     const handleAdd = () => {
         dispatch(resetAssignment(assignment));
         navigate(`/Kanbas/Courses/${courseId}/Assignments/New`);
+    };
+
+    useEffect(() => {
+        client.findAssignmentsForCourse(courseId)
+            .then((assignments) =>
+                dispatch(selectAssignments(assignments))
+            );
+    }, [courseId]);
+
+    const handleAddAssignment = () => {
+        client.createAssignment(courseId, assignment).then((assignment) => {
+            dispatch(addAssignment(assignment));
+        });
+    };
+
+    const handleDeleteAssignment = (assignmentId: string) => {
+        client.deleteAssignment(assignmentId).then((status) => {
+            dispatch(deleteAssignment(assignmentId));
+        });
     };
 
     return (
@@ -68,7 +91,7 @@ function Assignments() {
                                             style={{ borderRadius: '5px', padding: "3px" }}
                                             onClick={() => {
                                                 if (window.confirm("Are you sure you want to remove the assignment?")) {
-                                                    dispatch(deleteAssignment(assignment._id));
+                                                    handleDeleteAssignment(assignment._id);
                                                 }
                                             }}>
                                             Delete

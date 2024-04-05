@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import * as db from "../Database";
+// import * as db from "../Database";
+import axios from "axios";
+import * as courseClient from "../Courses/client";
 
 function Dashboard({ courses, course, setCourse, addNewCourse,
     deleteCourse, updateCourse }: {
@@ -8,6 +10,16 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
         addNewCourse: () => void; deleteCourse: (course: any) => void;
         updateCourse: () => void;
     }) {
+
+    const fetchAllCourses = async () => {
+        const courses = await courseClient.fetchAllCourses();
+        setCourse(courses);
+    };
+
+    useEffect(() => {
+        fetchAllCourses();
+    }, []);
+
     return (
         <div className="p-4">
             <h1>Dashboard</h1>
@@ -31,7 +43,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                 Update
             </button>
             <br />
-            <h2>Published Courses (7)</h2>
+            <h2>Published Courses (21)</h2>
             <hr />
             <div className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">

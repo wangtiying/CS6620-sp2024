@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { assignments } from "../../../Database";
+// import { assignments } from "../../../Database";
 import { FaCheckCircle } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../../store";
@@ -8,13 +8,15 @@ import {
     addAssignment,
     updateAssignment,
     deleteAssignment,
-    selectAssignment
+    resetAssignment,
+    selectAssignment,
+    selectAssignments
 } from "../assignmentsReducer";
+import * as client from "../client";
+import { assignments } from "../../../Database";
 
 function AssignmentEditor() {
     const { assignmentId } = useParams();
-    // const assignment = assignments.find(
-    //     (assignment) => assignment._id === assignmentId);
     const { courseId } = useParams();
     const navigate = useNavigate();
     const assignmentList = useSelector((state: KanbasState) =>
@@ -22,20 +24,39 @@ function AssignmentEditor() {
     const assignment = useSelector((state: KanbasState) =>
         state.assignmentsReducer.assignment);
     const dispatch = useDispatch();
-    const handleSave = () => {
+
+    useEffect(() => {
+        client.findAssignmentsForCourse(courseId)
+            .then((assignments) =>
+                dispatch(selectAssignments(assignments))
+            );
+    }, [courseId]);
+
+    const handleAddAssignment = () => {
+        client.createAssignment(courseId, assignment).then((assignment) => {
+            dispatch(addAssignment(assignment));
+        });
+    };
+
+    const handleUpdateAssignment = async () => {
+        const status = await client.updateAssignment(assignment);
+        dispatch(updateAssignment(assignment));
+    };
+
+
+    const handleSave = async () => {
         if (assignmentId === 'New') {
-            // Create a new assignment
-            dispatch(addAssignment({
-                ...assignment,
-                course: courseId // Generate a unique ID for the new assignment
-            }));
+            handleAddAssignment()
+                // Create a new assignment
+                ;
         } else {
             // Update an existing assignment
-            dispatch(updateAssignment(assignment));
+            handleUpdateAssignment();
         }
 
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
+
 
     return (
         <>
@@ -52,12 +73,6 @@ function AssignmentEditor() {
                     className="form-control mb-2"
                     onChange={(e) => dispatch(selectAssignment({ ...assignment, title: e.target.value }))
                     } />
-                {/* <h5>Assignment ID</h5>
-                <input value={assignment._id}
-                    style={{ width: "300px" }}
-                    className="form-control mb-2"
-                    onChange={(e) => dispatch(selectAssignment({ ...assignment, _id: e.target.value }))
-                    } /> */}
                 <h5>Assignment Description</h5>
                 <textarea value={assignment.description} style={{ width: "800px", height: "100px", borderColor: "lightgray" }}
                     onChange={(e) => dispatch(selectAssignment({ ...assignment, description: e.target.value }))
