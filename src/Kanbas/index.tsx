@@ -1,3 +1,4 @@
+import Account from "./Account";
 import KanbasNavigation from "./Navigation";
 import Dashboard from "./Dashboard";
 import Courses from "./Courses";
@@ -12,6 +13,8 @@ function Kanbas() {
     const [courses, setCourses] = useState<any[]>([]);
 
     const COURSES_API = `${API_BASE}/api/courses`;
+
+    // const COURSES_API = `http://localhost:4000/api/courses`;
     const [course, setCourse] = useState({
         _id: "1234", name: "New Course", number: "New Number",
         startDate: "2023-09-10", endDate: "2023-12-15",
@@ -65,8 +68,9 @@ function Kanbas() {
                 <KanbasNavigation />
                 <div style={{ flexGrow: 1 }}>
                     <Routes>
+                        <Route path="/Account/*" element={<Account />} />
                         <Route path="/" element={<Navigate to="Dashboard" />} />
-                        <Route path="Account" element={<h1>Account</h1>} />
+                        {/* <Route path="Account" element={<h1>Account</h1>} /> */}
                         <Route path="Dashboard" element={<Dashboard
                             courses={courses}
                             course={course}

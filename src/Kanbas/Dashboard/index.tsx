@@ -16,9 +16,11 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
         setCourse(courses);
     };
 
+
     useEffect(() => {
         fetchAllCourses();
     }, []);
+
 
     return (
         <div className="p-4">

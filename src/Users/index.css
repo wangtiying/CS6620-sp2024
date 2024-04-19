@@ -1,0 +1,9 @@
+.table th {
+    border-collapse: collapse;
+    border: none;
+}
+
+.table td {
+    border-collapse: collapse;
+    border: none;
+}
